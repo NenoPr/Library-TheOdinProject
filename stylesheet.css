@@ -1,0 +1,17 @@
+
+
+* {
+    border: 1px solid blue;
+}
+
+#library {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
+}
+
+.book {
+    display: grid;
+    grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr;
+    height: fit-content;
+    width: fit-content;
+}
