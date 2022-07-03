@@ -1,17 +1,407 @@
+/* CSS HEX */
+/* --honeydew: #d0ddd4ff;
+--granite-gray: #686868ff;
+--cinnabar: #f24333ff;
+--egyptian-blue: #0a369dff;
+--carnation-pink: #ff99c8ff; */
 
+/* CSS HSL */
+/* --honeydew: hsla(138, 16%, 84%, 1);
+--granite-gray: hsla(0, 0%, 41%, 1);
+--cinnabar: hsla(5, 88%, 57%, 1);
+--egyptian-blue: hsla(222, 88%, 33%, 1);
+--carnation-pink: hsla(332, 100%, 80%, 1); */
+
+/* SCSS HEX */
+/* $honeydew: #d0ddd4ff;
+$granite-gray: #686868ff;
+$cinnabar: #f24333ff;
+$egyptian-blue: #0a369dff;
+$carnation-pink: #ff99c8ff; */
+
+/* SCSS HSL */
+/* $honeydew: hsla(138, 16%, 84%, 1);
+$granite-gray: hsla(0, 0%, 41%, 1);
+$cinnabar: hsla(5, 88%, 57%, 1);
+$egyptian-blue: hsla(222, 88%, 33%, 1);
+$carnation-pink: hsla(332, 100%, 80%, 1); */
+
+/* SCSS RGB */
+/* $honeydew: rgba(208, 221, 212, 1);
+$granite-gray: rgba(104, 104, 104, 1);
+$cinnabar: rgba(242, 67, 51, 1);
+$egyptian-blue: rgba(10, 54, 157, 1);
+$carnation-pink: rgba(255, 153, 200, 1); */
+
+/* SCSS Gradient */
+/* $gradient-top: linear-gradient(0deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-right: linear-gradient(90deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-bottom: linear-gradient(180deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-left: linear-gradient(270deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-top-right: linear-gradient(45deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-bottom-right: linear-gradient(135deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-top-left: linear-gradient(225deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-bottom-left: linear-gradient(315deg, #d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff);
+$gradient-radial: radial-gradient(#d0ddd4ff, #686868ff, #f24333ff, #0a369dff, #ff99c8ff); */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@700&display=swap');
+
+
+:root {
+    --library: #F1E8B8;
+    --headers: #F6F4F3;
+    --cinnabar: #f24333ff;
+    --egyptian-blue: #0a369dff;
+    --carnation-pink: #ff99c8ff;
+    --book-color: #FBF9FF;
+    font-family: Roboto;
+    font-size: 1vh;
+}
+
+
+#pallete {
+    color: 
+    #E2E2E2
+    #979797
+    #f24333ff
+    #0a369dff
+    #ff99c8ff;
+}
 
 * {
-    border: 1px solid blue;
+    /* outline: 1px solid blue; */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#pop-up {
+    width: 30vw;
+    height: fit-content;
+    position: fixed;
+    left: 35vw;
+    top: 25vh;
+    visibility: hidden;
+    padding: 1rem;
+    background-color: white;
+}
+
+#pop-up > #form {
+    display: grid;
+    grid-template: repeat(auto-fit, minmax(10px, 1fr)) / 1fr;
+    gap: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+#change-Read-Status-div {
+    display: grid;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    width: 30vw;
+    height: 30vh;
+    position: fixed;
+    left: 35vw;
+    top: 25vh;
+    visibility: hidden;
+    padding: 1rem;
+    background-color: white;
+    justify-items: center;
+    align-items: center;
+    border: .7rem solid rgba(242, 67, 51, 0.5);
+    border-radius: .5rem;
+    box-shadow: 0 0 .4rem .1rem rgba(0, 0, 0, 0.5);
+}
+
+/* #region ---- Change read status elements ---- */
+
+#change-Read-Status-div > p {
+    grid-row: 1;
+    grid-column: 2;
+    font-size: 2rem;
+}
+
+#change-Read-Status-div > #changeToRead {
+    grid-row: 2;
+    grid-column: 1;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: 2rem;
+    border: .2rem solid black;
+    border-radius: .5rem;
+    height: 4rem;
+    width: 7rem;
+    background-color: rgba(47, 201, 47, 0.741);
+    cursor: pointer;
+}
+
+#change-Read-Status-div > #changeToReading {
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: 2rem;
+    border: .2rem solid black;
+    border-radius: .5rem;
+    height: 4rem;
+    width: 10rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+#change-Read-Status-div > #changeToNotRead {
+    grid-row: 2;
+    grid-column: 3;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: 2rem;
+    border: .2rem solid black;
+    border-radius: .5rem;
+    height: 4rem;
+    width: 12rem;
+    background-color: rgb(222, 81, 81);
+    cursor: pointer;
+}
+
+#change-Read-Status-div > #cancelReadStatusChange {
+    grid-row: 3;
+    grid-column: 2;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: 2rem;
+    border: .2rem solid black;
+    border-radius: .5rem;
+    height: 4rem;
+    width: 10rem;
+    cursor: pointer;
+}
+
+/* #endregion  ---- Change read status elements ----*/
+
+#content {
+    display: grid;
+    grid-template: 1fr 10fr 1fr / 1fr 7fr 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+#header {
+    display: grid;
+    grid-row: 1;
+    grid-column: 1 / 4;
+    background-color: var(--headers);
+    justify-content: center;
+    align-content: center;
+    font-size: 2rem;
+}
+
+#left-column {
+    grid-row: 2;
+    grid-column: 1;
+    display: grid;
+    grid-template: repeat(5, 1fr) / 1fr;
+    background-color: var(--headers);
+    padding: 1rem;
+}
+
+#delete-book {
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
 }
 
 #library {
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    overflow-y: scroll; */
     display: grid;
-    grid-template: 1fr / 1fr 1fr 1fr;
+    grid-template: auto / repeat(3, auto);
+    grid-row: 2 / 3;
+    grid-column: 2 / 2;
+    overflow-y: scroll;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: var(--library);
+}
+
+#new-book {
+    display: grid;
+    cursor: pointer;
+    justify-content: center;
+    align-content: center;
+    background-color: rgba(102, 102, 102, 0.548);
+    border-radius: 1rem;
+    padding: 1rem;
+    height: 35vh;
+    width: 20vw;
+    font-size: 1.5rem;
+    box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, 0.5);
+}
+
+#new-book:hover {
+    box-shadow: 0 0 .5rem .2rem rgba(0, 0, 0, 0.5);
+    transform: scale(1.005);
+}
+
+#new-book:active {
+    transform: scale(1);
 }
 
 .book {
     display: grid;
-    grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr;
-    height: fit-content;
-    width: fit-content;
+    grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr;
+    background-color: #247BA0;
+    border-radius: 1rem;
+    padding: 1rem;
+    height: 35vh;
+    width: 20vw;
+    column-gap: 2rem;
+    font-size: 1.5rem;
+    box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.book:hover {
+    box-shadow: 0 0 .5rem .2rem rgba(0, 0, 0, 0.5);
+}
+
+.book:active {
+    box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, 0.5);
+}
+
+/* #region ---- Book elements position ----  */
+.book > .image {
+    grid-row: 1 / 8;
+    grid-column: 1;
+    margin: 0;
+    padding: 0;
+    background-image: url(img/Supe-chan\ I\ wont\ be\ shaken\ off\ I\ will\ stand\ you\ will\ fear\ me\ I\ will\ find\ it\ cherish\ it\ protect\ it\ I\ dont\ care\ torutre\ me\ i\ wont\ die.jpg);
+    background-size: contain;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border: 1rem solid white;
+}
+
+.book > .title {
+    grid-row: 1;
+    grid-column: 2;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.book > .author {
+    grid-row: 2;
+    grid-column: 2;
+    margin: 0;
+    padding: 0;
+}
+
+.book > .pages {
+    grid-row: 3;
+    grid-column: 2;
+    margin: 0;
+    padding: 0;
+}
+
+.book > .pubDate {
+    grid-row: 4;
+    grid-column: 2;
+    margin: 0;
+    padding: 0;
+}
+
+.book > .readStatus {
+    grid-row: 5;
+    grid-column: 2;
+    margin: 0;
+    padding: 0;
+}
+
+.book > .delete-Button {
+    grid-row: 7;
+    grid-column: 2;
+    border: .2rem solid #979797;
+    background-color: rgb(250, 131, 131);
+    justify-self: center;
+    align-self: center;
+    cursor: pointer;
+}
+
+.book > .read-Status {
+    grid-row: 6;
+    grid-column: 2;
+    border: .2rem solid #979797;
+    background-color: aquamarine;
+    justify-self: center;
+    align-self: center;
+    cursor: pointer;
+}
+
+/* #endregion */
+
+#right-column {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr;
+    grid-row: 2;
+    grid-column: 3;
+    background-color: var(--headers);
+}
+
+#form {
+    padding-top: 5rem;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#new-book-submit-button {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+#footer {
+    display: grid;
+    grid-row: 3;
+    grid-column: 1 / 4;
+    background-color: var(--headers);
+    grid-template: 1fr 1fr 1fr / 1fr;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+    gap: 0;
+}
+
+#footer > p {
+    margin: 0;
+    padding: 0;
+}
+
+
+@media (min-width: 2560px) {
+    .book, #new-book {
+        height: 25vh;
+        width: 15vw;
+        font-size: 1rem;
+    }
+
+    #library {
+        grid-template: auto / repeat(4, 1fr);
+        grid-row: 2 / 3;
+        grid-column: 2 / 2;
+        overflow-y: scroll;
+        gap: 2rem;
+        padding: 2rem;
+        background-color: var(--library);
+    }
+    
 }
