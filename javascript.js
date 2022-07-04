@@ -17,8 +17,8 @@ class Library {
                 placeholder.push(element["title"])
                 placeholder.push(element["author"])
                 placeholder.push(element["pages"])
-                placeholder.push(element["pubDate"])
                 placeholder.push(element["readStatus"])
+                placeholder.push(element["imageLink"])
                 breakBool = true;
             }
         });
@@ -29,6 +29,7 @@ class Library {
         this.addBookToLibrary(ObjectPlaceholder);
         this.appendNewBookToHTML(ObjectPlaceholder)
     }
+
     appendNewBookToHTML(book) {
         let bookInfoCopy = myLib.readBookInfo(book["title"]);
 
@@ -42,28 +43,27 @@ class Library {
 
         let pTitle = document.createElement("p");
         pTitle.textContent += bookInfoCopy[0]
-        pTitle.className += "title"+Math.random(0,10)
+        pTitle.className += "title"
 
+        let pAuthorInfo = document.createElement("p");
+        pAuthorInfo.textContent += ""
+        pAuthorInfo.className = "authorInfo"
 
         let pAuthor = document.createElement("p");
-        pAuthor.textContent += "Author: "
         pAuthor.textContent += bookInfoCopy[1]
         pAuthor.className += "author"
 
-
         let pPages = document.createElement("p");
-        pPages.textContent += "Pages: "
-        pPages.textContent += bookInfoCopy[2]
+        pPages.textContent += bookInfoCopy[2] + " Pages"
         pPages.className += "pages"
 
-        let pPubDate = document.createElement("p");
-        pPubDate.textContent += "Published Date: "
-        pPubDate.textContent += bookInfoCopy[3]
-        pPubDate.className += "pubDate"
+        let pReadStatusInfo = document.createElement("p");
+        pReadStatusInfo.textContent += ""
+        pReadStatusInfo.className = "readInfo"
+
 
         let pReadStatus = document.createElement("p");
-        pReadStatus.textContent += "Reading Status: "
-        pReadStatus.textContent += bookInfoCopy[4]
+        pReadStatus.textContent += bookInfoCopy[3]
         pReadStatus.className += "readStatus"
 
         let changeReadStatus = document.createElement("div")
@@ -77,15 +77,23 @@ class Library {
         deleteButton.id += bookInfoCopy[0]+"-id-"+Math.random(0,10)
         deleteButton.textContent = "Delete Book"
 
+
         divElement.appendChild(pImage)
         divElement.appendChild(pTitle)
+        divElement.appendChild(pAuthorInfo)
         divElement.appendChild(pAuthor)
         divElement.appendChild(pPages)
-        divElement.appendChild(pPubDate)
+        divElement.appendChild(pReadStatusInfo)
         divElement.appendChild(pReadStatus)
         divElement.appendChild(pImage)
         divElement.appendChild(changeReadStatus)
         divElement.appendChild(deleteButton)
+
+        if (bookInfoCopy[4] != undefined) {
+            console.log("Not null", divElement.childNodes[0])
+            pImage.style.backgroundImage = "url("+bookInfoCopy[4]+")"
+        }
+        console.log("what",bookInfoCopy)
 
 
         docLibrary.appendChild(divElement);
@@ -100,85 +108,138 @@ class Library {
         // Add Event Listeners on Buttons for changing reading status on books that were created after the initial ones
         counter = changeReadStatusElement.length - 1;
         changeReadStatusElement[counter].addEventListener("click", event => {
-            console.log("awfafw",changeReadStatusElement[0].parentNode)
-            myLib.placeholderReadStatus(changeReadStatusElement[counter].parentNode)
+            //send the functions pointer to its targets parent node
+            myLib.placeholderReadStatus(event.target.parentNode)
         })
 
+        if (pReadStatus.textContent == "Read"){
+            pReadStatus.style.backgroundColor = "green"
+        }
+        if (pReadStatus.textContent == "Reading"){
+            pReadStatus.style.backgroundColor = "rgb(0, 84, 136)"
+        }
+        if (pReadStatus.textContent == "Not Read"){
+            pReadStatus.style.backgroundColor = "gray"
+        }
         
     }
 
     placeholderReadStatus(node) {
 
-        console.log("hit",node)
-        // Create Read status window
+        // ---- Create Read status window ----
+        console.log("Noda:",node)
 
-        let divDisplayCover = document.createElement("div")
-        divDisplayCover.id += "change-Read-Status-div"
-
+        // unset the visibility of the cover div that stops the interaction with the rest of the site
+        changeReadStatusCover.style.visibility = "unset"
+        //crete display
         let divDisplay = document.createElement("div")
         divDisplay.id += "change-Read-Status-div"
-        
+        //create the action info prompt 
         let pInfoChoose = document.createElement("p")
-        pInfoChoose.textContent = "Change read Status to:"
-      
+        pInfoChoose.textContent = "Change read Status to?"
+        //create Read status div
         let divChangeToRead = document.createElement("div")
         divChangeToRead.id += "changeToRead"
         divChangeToRead.textContent = "Read"
-      
+        //create Reading status div
         let divChangeToReading = document.createElement("div")
         divChangeToReading.id += "changeToReading"
         divChangeToReading.textContent = "Reading"
-      
+        //create Not Read status div
         let divChangeToNotRead = document.createElement("div")
         divChangeToNotRead.id += "changeToNotRead"
-        divChangeToNotRead.textContent = "Read"
-      
+        divChangeToNotRead.textContent = "Not Read"
+        //create the Cancel action div
         let divCancelReadStatusChange = document.createElement("div")
         divCancelReadStatusChange.id += "cancelReadStatusChange"
         divCancelReadStatusChange.textContent = "Cancel"
-      
-      
+
+        //append the created elements
         divDisplay.appendChild(pInfoChoose);
         divDisplay.appendChild(divChangeToRead);
         divDisplay.appendChild(divChangeToReading);
         divDisplay.appendChild(divChangeToNotRead);
         divDisplay.appendChild(divCancelReadStatusChange);
-      
+        
         node.appendChild(divDisplay);
 
-        divDisplay.style.visibility = "unset"
 
+        //Adds event Listeners to change the read status content and data on the current node
         let changeToRead = document.getElementById("changeToRead")
-        console.log("changetoread",changeToRead)
         changeToRead.addEventListener("click", event => {
-            console.log(changeToRead.parentNode.parentNode)
-            myLib.changeReadStatusFunc(changeToRead.parentNode.parentNode)
+            console.log("wewewewee",changeToRead.parentNode.parentNode)
+            myLib.changeReadStatusFunc(node, "Read")
+        })
+
+        let changeToReading = document.getElementById("changeToReading")
+        changeToReading.addEventListener("click", event => {
+            console.log(changeToReading.parentNode.parentNode)
+            myLib.changeReadStatusFunc(node, "Reading")
+        })
+
+        let changeToNotRead = document.getElementById("changeToNotRead")
+        changeToNotRead.addEventListener("click", event => {
+            console.log(changeToNotRead.parentNode.parentNode)
+            myLib.changeReadStatusFunc(node, "Not Read")
+        })
+
+        let cancelReadStatusChange = document.getElementById("cancelReadStatusChange")
+        cancelReadStatusChange.addEventListener("click", event => {
+            console.log(cancelReadStatusChange.parentNode.parentNode)
+            myLib.changeReadStatusFunc(node, "Cancel")
         })
     }
 
+    changeReadStatusFunc(node, action) {
+        //Changes the read content on the website
+        if (action == "Read"){
+            console.log("node.childNodes",node.childNodes)
+            node.childNodes[5].textContent = "Read"
+            node.childNodes[5].style.backgroundColor = "green"
+        }
+        if (action == "Reading"){
+            node.childNodes[5].textContent = "Reading"
+            node.childNodes[5].style.backgroundColor = "orange"
+        }
+        if (action == "Not Read"){
+            node.childNodes[5].textContent = "Not Read"
+            node.childNodes[5].style.backgroundColor = "gray"
+        }
+        //changes read status on the myLibrary array
+        if (action != "Cancel"){
+            for (let i = 0;i<myLib.myLibrary.length;i++) {
+                if(myLib.myLibrary[i]["title"] == node.childNodes[0].textContent) {
+                    myLib.myLibrary[i]["readStatus"] = action
+                }
+            }
+        }
+        //removes the change status window and sets the cover back to invisible
+        node.removeChild(node.childNodes[9])
+        changeReadStatusCover.style.visibility = "hidden"
+    }
+
     deleteBookFromHTML(element) {
+        // gets the element from the pointer passed to the function
         let childForRemoval = document.getElementById(element.target.id)
-        console.log(childForRemoval)
+        //finds the object that shares the title and deletes it
+        for (let i = 0;i<myLib.myLibrary.length;i++) {
+            if(myLib.myLibrary[i]["title"] == childForRemoval.parentNode.childNodes[0].textContent) {
+                myLib.myLibrary.splice(i, 1)
+            }
+        }
+        //removes the book from the DOM
         childForRemoval.parentNode.parentNode.removeChild(childForRemoval.parentNode);
     }
-
-    changeReadStatusFunc(element) {
-
-        console.log("funcchec",element.childNodes[4].textContent)
-        element.childNodes[4].textContent = "Reading Status: Read"
-
-    }
-    
 }
 
 
 class Book {
-    constructor(title, author, pages, pubDate, readStatus) {
+    constructor(title, author, pages, readStatus, imageLink) {
         this.title = title
         this.author = author
         this.pages = pages
-        this.pubDate = pubDate
         this.readStatus = readStatus
+        this.imageLink = imageLink
     }
 }
 
@@ -194,6 +255,7 @@ let docLibrary = document.getElementById("library");
 
 // Creates Book object and creates the Display for the book on DOM
 const addBookButton = document.getElementById("add-Book")
+const cancelNewBook = document.getElementById("cancelNewBook")
 
 // Create a Link to the class on every book that triggers the deletion of the book
 let deleteBook = document.getElementsByClassName("delete-Button")
@@ -204,6 +266,7 @@ let deleteBook = document.getElementsByClassName("delete-Button")
 // Displays hidden div and links its activation to every status change div on every book
 let changeReadStatusElement = document.getElementsByClassName("read-Status")
 let changeReadStatusWindow = document.getElementById("change-Read-Status-div")
+const changeReadStatusCover= document.getElementById("change-Read-Status-div-cover")
 
 // Status Changes links to DOM
 let cancelReadStatusChange = document.getElementsByClassName("cancelReadStatusChange")
@@ -232,6 +295,7 @@ let cancelReadStatusChange = document.getElementsByClassName("cancelReadStatusCh
 // Listens for event to unhide the UI for inputting data for new book
 newBookAddButton.addEventListener("click", (event) => {
     newBookDisplay.style.visibility = "unset";
+    changeReadStatusCover.style.visibility = "unset"
 })
 
 // Creates a new book on supplied information
@@ -239,44 +303,58 @@ addBookButton.addEventListener("click", event => {
 
     let bookInfoArray = [];
 
-    for (let i = 0; i < newBookForm.elements.length; i++) {
+    for (let i = 0; i < 4; i++) {
         if (newBookForm.elements[i].value == "") return
         bookInfoArray.push(newBookForm.elements[i].value)
+        newBookForm.elements[i].value = ""
+    }
+    if (newBookForm.elements[4].value != "") {
+        bookInfoArray.push(newBookForm.elements[4].value)
+        newBookForm.elements[4].value = ""
     }
 
     bookInfoArray.forEach( element => console.log("bookInfoArray value check:",element))
+    console.log(bookInfoArray)
     myLib.createNewBook(bookInfoArray);
     newBookDisplay.style.visibility = "hidden";
+    changeReadStatusCover.style.visibility = "hidden";
+    bookInfoArray = [];
+})
+
+cancelNewBook.addEventListener("click", event => {
+    newBookDisplay.style.visibility = "hidden";
+    changeReadStatusCover.style.visibility = "hidden";
 })
 
 
 // Create a Library Instance and insert Objects
 const myLib = new Library;
 
-let lib = new Book("Ikigai", "Hector Gracia", "190", "2016", "Reading")
+for (let i = 0; i<5; i++)
+{let lib = new Book("Ikigai", "Hector Gracia", "190", "Read", "https://images-na.ssl-images-amazon.com/images/I/71tbalAHYCL.jpg")
 console.log(lib.title)
 myLib.addBookToLibrary(lib)
 myLib.appendNewBookToHTML(lib)
 
-lib = new Book("Ikigai u praksi", "Hector Gracia", "247", "2019", "Not Read")
+lib = new Book("Lunar Storm", "Terry Crosby", "247", "Reading" , "https://www.adobe.com/express/create/cover/media_178ebed46ae02d6f3284c7886e9b28c5bb9046a02.jpeg?width=400&format=jpeg&optimize=medium")
 console.log(lib.title)
 myLib.addBookToLibrary(lib)
 myLib.appendNewBookToHTML(lib)
 
-lib = new Book("Besplatno", "Željko Ivanković", "320", "2018", "Reading")
+lib = new Book("The Book of Art", "Regina Phalange", "320", "Not Read" , "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/art-book-cover-design-template-34323b0f0734dccded21e0e3bebf004c_screen.jpg?ts=1637015198")
 console.log(lib.title)
 myLib.addBookToLibrary(lib)
 myLib.appendNewBookToHTML(lib)
 
-lib = new Book("Nova Zemlja", "Eckhart Tolle", "265", "2019", "Reading")
+lib = new Book("Secrets of the Silent Witch", "Matsuti Isora", "265", "Reading", "https://images-na.ssl-images-amazon.com/images/I/91Y9TOg10rL.jpg")
 console.log(lib.title)
 myLib.addBookToLibrary(lib)
 myLib.appendNewBookToHTML(lib)
 
-lib = new Book("Unutarnje Inženjerstvo", "SadhGuru", "231", "2019", "Read")
+lib = new Book("Solo Leveling", "Chugong", "231", "Not Read", "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1619952571l/56817438.jpg")
 console.log(lib.title)
 myLib.addBookToLibrary(lib)
-myLib.appendNewBookToHTML(lib)
+myLib.appendNewBookToHTML(lib)}
 
 
 // ---- Old code for inserting data into DOM ----

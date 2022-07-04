@@ -10,6 +10,10 @@
 </head>
 <body>
 
+    <div id="change-Read-Status-div-cover">
+
+    </div>
+
     <div id="content">
 
         <div id="header">
@@ -17,31 +21,31 @@
         </div>
 
         <div id="left-column">
-            <button>Sort by Title</button>
+            <!-- <button>Sort by Title</button>
             <button>Sort by Author</button>
             <button>Sort by Pages</button>
             <button>Sort by Published Date</button>
-            <button>Sort by Reading Status</button>
+            <button>Sort by Reading Status</button> -->
+            <div id="new-book">Add a New Book</div>
         </div>
 
         <div id="library">
-            <div id="new-book">Add New Book</div>
+            
+            <!-- <use xlink href="#book-svg"></use> -->
         </div>
 
         <div id="right-column">
             
         </div>
 
-        <div id="footer">
-            <p>Personal Library Project</p>
-            <p>For</p>
-            <p>The Odin Project</p>
-        </div>
-
     </div>
 
     <div id="pop-up">
         <form id="form">
+
+            <div id="cancelNewBook">
+                Cancel
+            </div>
 
             <label for="title">Title</label>
             <input type="text" name="title" id="title">
@@ -52,13 +56,13 @@
             <label for="pages">Pages</label>
             <input type="text" name="pages" id="pages">
 
-            <label for="pubDate">Published Date</label>
-            <input type="text" name="pubDate" id="pubDate">
-
             <label for="readStatus">Reading Status</label>
             <input type="text" name="readStatus" id="readStatus">
 
-            <div id="add-Book" style="border: 3px solid black; cursor: pointer;">Add Book</div>
+            <label for="imagelink">Image Link (Empty for a default image)</label>
+            <input type="text" name="imagelink" id="imagelink">
+
+            <div id="add-Book">Add Book</div>
 
         </form>
     </div>
@@ -68,7 +72,7 @@
 
 
 <svg display="none">
-    <symbol width="48" height="48" viewBox="0 0 24 24" id="book-svg">
-        <path fill="currentColor" d="M18,2A2,2 0 0,1 20,4V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H18M18,4H13V12L10.5,9.75L8,12V4H6V20H18V4Z" />
+    <symbol width="200py" height="200px" viewBox="0 0 240 240" id="book-svg">
+        <path d="M18,2A2,2 0 0,1 20,4V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H18M18,4H13V12L10.5,9.75L8,12V4H6V20H18V4Z" />
     </symbol>
 </svg>
