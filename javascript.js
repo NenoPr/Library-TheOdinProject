@@ -354,8 +354,17 @@ myLib.appendNewBookToHTML(lib)
 lib = new Book("Solo Leveling", "Chugong", "231", "Not Read", "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1619952571l/56817438.jpg")
 console.log(lib.title)
 myLib.addBookToLibrary(lib)
-myLib.appendNewBookToHTML(lib)}
+myLib.appendNewBookToHTML(lib)
 
+lib = new Book("The Art og Guweiz", "GUWEIZ", "142", "Read", "https://japanese-creative-books.com/wp-content/uploads/2021/09/The-Art-of-GUWEIZ.jpeg")
+console.log(lib.title)
+myLib.addBookToLibrary(lib)
+myLib.appendNewBookToHTML(lib)
+
+lib = new Book("A Complete Overview on Web-Development", "Ayush Mauryavanshi", "246", "Reading", "https://images-na.ssl-images-amazon.com/images/I/61rkWdRWGSL.jpg")
+console.log(lib.title)
+myLib.addBookToLibrary(lib)
+myLib.appendNewBookToHTML(lib)}
 
 // ---- Old code for inserting data into DOM ----
 
